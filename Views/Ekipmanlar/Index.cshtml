@@ -1,0 +1,35 @@
+﻿@model List<RezerveMuzikWeb.Models.Ekipman>
+@{
+    ViewData["Title"] = "Ekipmanlarımız";
+}
+
+<div class="container" style="margin-top: 150px; margin-bottom: 100px;">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="section_title text-center mb-65">
+                <h3 style="color: black; font-weight: bold;">Kiralık Ekipmanlar</h3>
+                <p style="color: #444;">Stüdyo provalarınız için ekstra ekipman ihtiyacınızı buradan karşılayabilirsiniz.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var ekipman in Model)
+        {
+            <div class="col-xl-3 col-md-6">
+                <div class="single_music text-center" style="background-color: #1a1a1a; padding: 30px 15px; border-radius: 10px; margin-bottom: 30px; border: 1px solid #333;">
+
+                    <i class="fa fa-plug" style="font-size: 40px; color: #ff3500; margin-bottom: 15px;"></i>
+
+                    <h4 style="color: white; margin-bottom: 15px;">@ekipman.EkipmanAdi</h4>
+
+                    <p style="color: #ff3500; font-size: 20px; font-weight: bold; margin-bottom: 20px;">
+                        @ekipman.SaatlikKiraUcreti ₺ <span style="font-size: 12px; color: #a0a0a0;">/ Saat</span>
+                    </p>
+
+                    <a href="/Rezervasyon/Index" class="btn btn-outline-danger btn-sm">Rezerve Et</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
