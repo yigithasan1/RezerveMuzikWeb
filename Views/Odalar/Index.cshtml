@@ -1,0 +1,36 @@
+﻿@model List<RezerveMuzikWeb.Models.Oda>
+@{
+    ViewData["Title"] = "Stüdyolarımız";
+}
+
+<div class="container" style="margin-top: 150px; margin-bottom: 100px;">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="section_title text-center mb-65">
+                <h3 style="color: white;">Stüdyolarımız</h3>
+                <p style="color: #a0a0a0;">İhtiyacınıza en uygun odayı seçin ve müziğe odaklanın.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var oda in Model)
+        {
+            <div class="col-xl-4 col-md-4">
+                <div class="single_music text-center" style="background-color: #1a1a1a; padding: 40px 20px; border-radius: 10px; margin-bottom: 30px; border: 1px solid #333;">
+                    <h3 style="color: white; margin-bottom: 15px;">@oda.OdaAdi</h3>
+
+                    <p style="color: #ff3500; font-size: 24px; font-weight: bold; margin-bottom: 10px;">
+                        @oda.SaatlikUcret ₺ <span style="font-size: 14px; color: #a0a0a0;">/ Saat</span>
+                    </p>
+
+                    <p style="color: #a0a0a0; margin-bottom: 25px;">
+                        <i class="fa fa-users"></i> Kapasite: @oda.Kapasite Kişi
+                    </p>
+
+                    <a href="/Rezervasyon/Index" class="boxed-btn3">Hemen Kirala</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
