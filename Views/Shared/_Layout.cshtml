@@ -26,6 +26,56 @@
     <link rel="stylesheet" href="/musico/assets/css/slicknav.css">
     <link rel="stylesheet" href="/musico/assets/css/style.css">
     <!-- <link rel="stylesheet" href="/musico/assets/css/responsive.css"> -->
+    @if (ViewContext.RouteData.Values["controller"]?.ToString() != "Home")
+    {
+        <style>
+            .header-area {
+                background-color: #121212 !important;
+                border-bottom: 1px solid #333;
+            }
+        </style>
+    }
+    <style>
+        /* 1. Menü çubuğuna koyu renk arka plan veriyoruz ki her sayfada yazılar görünsün */
+        .header-area {}
+
+        /* 2. Menü Yazıları Normal Hali */
+        #navigation li a {
+            color: #ffffff !important; /* Beyaz ve net dursun */
+            font-weight: bold;
+            transition: all 0.3s ease-in-out; /* Parlama efektini yumuşatır */
+        }
+
+            /* 3. HOVER (Üzerine Gelince) Kırmızı ve Neon Parlama Efekti! */
+            #navigation li a:hover {
+                color: #ff3500 !important; /* Temanın kendi kırmızısı */
+                text-shadow: 0 0 15px rgba(255, 53, 0, 0.9); /* İşte o neon ışığı */
+            }
+
+            /* Admin Paneli yazısı hep kırmızı kalsın, üstüne gelince parlasın */
+            #navigation li a[href="/Admin/Index"] {
+                color: #ff3500 !important;
+            }
+
+        /* 4. Sosyal Medya İkonları (Yuvarlaklar ve içindeki logolar) */
+        .social_icon ul li a {
+            border-color: #555 !important; /* Yuvarlak çizgiler belirgin olsun */
+        }
+
+            .social_icon ul li a i {
+                color: #ffffff !important; /* İkonlar beyaz olsun */
+                transition: all 0.3s ease;
+            }
+
+            /* Sosyal medya ikonlarının üstüne gelince kırmızı olsun */
+            .social_icon ul li a:hover i {
+                color: #ff3500 !important;
+            }
+
+            .social_icon ul li a:hover {
+                border-color: #ff3500 !important;
+            }
+    </style>
 </head>
 
 <body>
@@ -79,10 +129,33 @@
             </div>
         </div>
     </header>
-    <!-- header-end -->
-    
+    <!-- header-end --> 
     <!-- footer start -->
-    @RenderBody()
+    @{
+        // Sistemin o an hangi Controller'da (sayfada) olduğunu yakalıyoruz
+        var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+        string bgStyle = "";
+
+        // Eğer "Odalar" sayfasındaysak stüdyo fotoğrafını koy
+        if (currentController == "Odalar")
+        {
+            bgStyle = "background-image: url('/img/studio_bg_dark.jpg'); background-size: cover; background-attachment: fixed; background-position: center;";
+        }
+        // Eğer "Ekipmanlar" sayfasındaysak ekipman fotoğrafını koy
+        else if (currentController == "Ekipmanlar")
+        {
+            bgStyle = "background-image: url('/img/equipment_bg_dark.jpg'); background-size: cover; background-attachment: fixed; background-position: center;";
+        }
+        // EĞER "REZERVASYON" SAYFASINDAYSAK REZERVASYON FOTOĞRAFINI KOY
+        else if (currentController == "Rezervasyon")
+        {
+            bgStyle = "background-image: url('/img/reservation_bg_dark.jpg'); background-size: cover; background-attachment: fixed; background-position: center;";
+        }
+    }
+
+    <div style="@bgStyle">
+        @RenderBody()
+    </div>
     <footer class="footer">
         <div class="footer_top">
             <div class="container">
